@@ -1,0 +1,27 @@
+From 589c22a40b24ea459f04e4e396f5374fa990ec87 Mon Sep 17 00:00:00 2001
+From: Dimitri John Ledkov <dimitri.j.ledkov@intel.com>
+Date: Wed, 18 Feb 2015 15:53:43 +0000
+Subject: [PATCH] Include stateless configuration.
+Organization: Intel Corporation (UK) Ltd. - Co. Reg. #1134945 - Pipers Way, Swindon SN3 1RJ
+
+---
+ conf.d/50-user.conf | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/conf.d/50-user.conf b/conf.d/50-user.conf
+index 07c9182..6a3e8b2 100644
+--- a/conf.d/50-user.conf
++++ b/conf.d/50-user.conf
+@@ -7,6 +7,9 @@
+ 	      $HOME/.config/fontconfig/conf.d
+ 	      $HOME/.config/fontconfig/fonts.conf
+ 	-->
++	<include ignore_missing="yes">/etc/fonts/conf.d</include>
++	<include ignore_missing="yes">/etc/fonts/fonts.conf</include>
++
+ 	<include ignore_missing="yes" prefix="xdg">fontconfig/conf.d</include>
+ 	<include ignore_missing="yes" prefix="xdg">fontconfig/fonts.conf</include>
+ 	<!-- the following elements will be removed in the future -->
+-- 
+2.1.0
+
