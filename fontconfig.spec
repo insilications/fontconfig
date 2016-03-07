@@ -4,7 +4,7 @@
 #
 Name     : fontconfig
 Version  : 2.11.1
-Release  : 15
+Release  : 16
 URL      : http://www.freedesktop.org/software/fontconfig/release/fontconfig-2.11.1.tar.gz
 Source0  : http://www.freedesktop.org/software/fontconfig/release/fontconfig-2.11.1.tar.gz
 Summary  : Font configuration and customization library
@@ -33,6 +33,7 @@ Patch5: 05_lcdfilterlegacy.patch
 Patch6: 05_ubuntu_add_hinting_and_antialiasing_confs.patch
 Patch7: 06_ubuntu_lcddefault.patch
 Patch8: 07_no_bitmaps.patch
+Patch9: 0001-Use-sane-defaults-throughout-the-system.patch
 
 %description
 Fontconfig is designed to locate fonts within the
@@ -62,6 +63,7 @@ Group: Development
 Requires: fontconfig-lib
 Requires: fontconfig-bin
 Requires: fontconfig-data
+Provides: fontconfig-devel
 
 %description dev
 dev components for the fontconfig package.
@@ -94,6 +96,7 @@ lib components for the fontconfig package.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 %reconfigure --disable-static --sysconfdir=/usr/share/defaults
@@ -102,7 +105,7 @@ make V=1  %{?_smp_mflags}
 %check
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=intel.com,localhost
+export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
