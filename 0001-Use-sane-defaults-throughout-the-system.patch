@@ -1,0 +1,41 @@
+From b708e980511789b72128f78381c00cb9c9b7bac1 Mon Sep 17 00:00:00 2001
+From: Ikey Doherty <michael.i.doherty@intel.com>
+Date: Mon, 7 Mar 2016 12:51:22 +0000
+Subject: [PATCH] Use sane defaults throughout the system
+
+Signed-off-by: Ikey Doherty <michael.i.doherty@intel.com>
+---
+ conf.d/60-latin.conf | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/conf.d/60-latin.conf b/conf.d/60-latin.conf
+index 573a257..a0471b4 100644
+--- a/conf.d/60-latin.conf
++++ b/conf.d/60-latin.conf
+@@ -4,6 +4,7 @@
+ 	<alias>
+ 		<family>serif</family>
+ 		<prefer>
++			<family>Clear Sans</family>
+ 			<family>DejaVu Serif</family>
+ 			<family>Bitstream Vera Serif</family>
+ 			<family>Times New Roman</family>
+@@ -16,6 +17,7 @@
+ 	<alias>
+ 		<family>sans-serif</family>
+ 		<prefer>
++			<family>Clear Sans</family>
+ 			<family>DejaVu Sans</family>
+ 			<family>Bitstream Vera Sans</family>
+ 			<family>Verdana</family>
+@@ -32,6 +34,7 @@
+ 	<alias>
+ 		<family>monospace</family>
+ 		<prefer>
++			<family>Droid Sans Mono for Powerline</family>
+ 			<family>DejaVu Sans Mono</family>
+ 			<family>Bitstream Vera Sans Mono</family>
+ 			<family>Inconsolata</family>
+-- 
+2.7.1
+

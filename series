@@ -6,3 +6,4 @@
 05_ubuntu_add_hinting_and_antialiasing_confs.patch
 06_ubuntu_lcddefault.patch
 07_no_bitmaps.patch
+0001-Use-sane-defaults-throughout-the-system.patch
