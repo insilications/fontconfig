@@ -4,7 +4,7 @@
 #
 Name     : fontconfig
 Version  : 2.12.1
-Release  : 19
+Release  : 20
 URL      : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.12.1.tar.gz
 Source0  : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.12.1.tar.gz
 Summary  : Font configuration and customization library
@@ -177,8 +177,8 @@ rm -rf %{buildroot}
 /usr/include/fontconfig/fcfreetype.h
 /usr/include/fontconfig/fcprivate.h
 /usr/include/fontconfig/fontconfig.h
-/usr/lib64/*.so
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/libfontconfig.so
+/usr/lib64/pkgconfig/fontconfig.pc
 
 %files doc
 %defattr(-,root,root,-)
@@ -189,4 +189,5 @@ rm -rf %{buildroot}
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/*.so.*
+/usr/lib64/libfontconfig.so.1
+/usr/lib64/libfontconfig.so.1.9.2
