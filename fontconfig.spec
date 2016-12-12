@@ -4,7 +4,7 @@
 #
 Name     : fontconfig
 Version  : 2.12.1
-Release  : 20
+Release  : 21
 URL      : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.12.1.tar.gz
 Source0  : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.12.1.tar.gz
 Summary  : Font configuration and customization library
@@ -17,11 +17,19 @@ Requires: fontconfig-doc
 BuildRequires : automake
 BuildRequires : automake-dev
 BuildRequires : fontconfig-data
+BuildRequires : gcc-dev32
+BuildRequires : gcc-libgcc32
+BuildRequires : gcc-libstdc++32
 BuildRequires : gettext-bin
+BuildRequires : glibc-dev32
+BuildRequires : glibc-libc32
 BuildRequires : libtool
 BuildRequires : libtool-dev
 BuildRequires : m4
 BuildRequires : pkg-config-dev
+BuildRequires : pkgconfig(32expat)
+BuildRequires : pkgconfig(32freetype2)
+BuildRequires : pkgconfig(32libxml-2.0)
 BuildRequires : pkgconfig(expat)
 BuildRequires : pkgconfig(freetype2)
 BuildRequires : pkgconfig(libxml-2.0)
@@ -63,6 +71,17 @@ Provides: fontconfig-devel
 dev components for the fontconfig package.
 
 
+%package dev32
+Summary: dev32 components for the fontconfig package.
+Group: Default
+Requires: fontconfig-lib32
+Requires: fontconfig-bin
+Requires: fontconfig-data
+
+%description dev32
+dev32 components for the fontconfig package.
+
+
 %package doc
 Summary: doc components for the fontconfig package.
 Group: Documentation
@@ -80,16 +99,35 @@ Requires: fontconfig-data
 lib components for the fontconfig package.
 
 
+%package lib32
+Summary: lib32 components for the fontconfig package.
+Group: Default
+Requires: fontconfig-data
+
+%description lib32
+lib32 components for the fontconfig package.
+
+
 %prep
 %setup -q -n fontconfig-2.12.1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+pushd ..
+cp -a fontconfig-2.12.1 build32
+popd
 
 %build
 export LANG=C
 %reconfigure --disable-static --sysconfdir=/usr/share/defaults
 make V=1  %{?_smp_mflags}
+pushd ../build32/
+export CFLAGS="$CFLAGS -m32"
+export CXXFLAGS="$CXXFLAGS -m32"
+export LDFLAGS="$LDFLAGS -m32"
+%reconfigure --disable-static --sysconfdir=/usr/share/defaults  --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
+make V=1  %{?_smp_mflags}
+popd
 
 %check
 export LANG=C
@@ -100,6 +138,15 @@ make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
 rm -rf %{buildroot}
+pushd ../build32/
+%make_install32
+if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
+then
+pushd %{buildroot}/usr/lib32/pkgconfig
+for i in *.pc ; do mv $i 32$i ; done
+popd
+fi
+popd
 %make_install
 
 %files
@@ -136,6 +183,7 @@ rm -rf %{buildroot}
 /usr/share/defaults/fonts/conf.d/90-synthetic.conf
 /usr/share/defaults/fonts/conf.d/README
 /usr/share/defaults/fonts/fonts.conf
+/usr/share/defaults/fonts/fonts.conf.bak
 /usr/share/fontconfig/conf.avail/10-antialiasing.conf
 /usr/share/fontconfig/conf.avail/10-autohint.conf
 /usr/share/fontconfig/conf.avail/10-hinting-full.conf
@@ -180,6 +228,11 @@ rm -rf %{buildroot}
 /usr/lib64/libfontconfig.so
 /usr/lib64/pkgconfig/fontconfig.pc
 
+%files dev32
+%defattr(-,root,root,-)
+/usr/lib32/libfontconfig.so
+/usr/lib32/pkgconfig/32fontconfig.pc
+
 %files doc
 %defattr(-,root,root,-)
 %doc /usr/share/doc/fontconfig/*
@@ -191,3 +244,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 /usr/lib64/libfontconfig.so.1
 /usr/lib64/libfontconfig.so.1.9.2
+
+%files lib32
+%defattr(-,root,root,-)
+/usr/lib32/libfontconfig.so.1
+/usr/lib32/libfontconfig.so.1.9.2
