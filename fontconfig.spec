@@ -4,7 +4,7 @@
 #
 Name     : fontconfig
 Version  : 2.12.1
-Release  : 22
+Release  : 23
 URL      : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.12.1.tar.gz
 Source0  : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.12.1.tar.gz
 Summary  : Font configuration and customization library
