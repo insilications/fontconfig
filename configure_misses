@@ -1,0 +1,21 @@
+Configure miss: _mktemp_s
+Configure miss: getprogname
+Configure miss: getexecname
+Configure miss: struct statvfs.f_basetype
+Configure miss: struct statvfs.f_fstypename
+Configure miss: struct statfs.f_fstypename
+Configure miss: if compiler needs -Werror to reject unknown flags
+Configure miss: docbook2html
+Configure miss: i686-generic-linux-gnu-pkg-config
+Configure miss: i686-generic-linux-gnu-objdump
+Configure miss: i686-generic-linux-gnu-dlltool
+Configure miss: i686-generic-linux-gnu-strip
+Configure miss: i686-generic-linux-gnu-mt
+Configure miss: _mktemp_s
+Configure miss: getprogname
+Configure miss: getexecname
+Configure miss: struct statvfs.f_basetype
+Configure miss: struct statvfs.f_fstypename
+Configure miss: struct statfs.f_fstypename
+Configure miss: if compiler needs -Werror to reject unknown flags
+Configure miss: docbook2html
