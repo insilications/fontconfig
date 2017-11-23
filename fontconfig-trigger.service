@@ -1,0 +1,8 @@
+[Unit]
+Description=Update font cache
+BindsTo=update-triggers.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/fc-cache
+
