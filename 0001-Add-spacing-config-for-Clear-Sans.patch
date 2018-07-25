@@ -1,0 +1,37 @@
+From 0463cb958a688d4f90cebc1dc099d9b27a352a04 Mon Sep 17 00:00:00 2001
+From: Athenas Jimenez Gonzalez <athenas.jimenez.gonzalez@intel.com>
+Date: Wed, 25 Jul 2018 11:16:42 -0500
+Subject: [PATCH RFC] Add spacing config for Clear Sans
+
+---
+
+Fontconfig patch. This config file was proposed by Brett as a solution for a
+Clear Sans rendering issue. His bug report mentions FLTK apps as affected, but 
+this bug also affects TigerVNC.
+
+ conf.d/20-unhint-clear-sans.conf | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 conf.d/20-unhint-clear-sans.conf
+
+diff --git a/conf.d/20-unhint-clear-sans.conf b/conf.d/20-unhint-clear-sans.conf
+new file mode 100644
+index 0000000..466ef3e
+--- /dev/null
++++ b/conf.d/20-unhint-clear-sans.conf
+@@ -0,0 +1,13 @@
++<?xml version="1.0"?>
++<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
++<fontconfig>
++        <match target="font">
++                <test name="family" compare="eq" ignore-blanks="true">
++                        <string>Clear Sans</string>
++                </test>
++                <edit name="spacing">
++                        <const>proportional</const>
++                </edit>
++        </match>
++
++</fontconfig>
+-- 
+2.18.0
+
