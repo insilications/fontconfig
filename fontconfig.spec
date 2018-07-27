@@ -4,7 +4,7 @@
 #
 Name     : fontconfig
 Version  : 2.13.0
-Release  : 33
+Release  : 34
 URL      : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.0.tar.gz
 Source0  : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.0.tar.gz
 Source1  : fontconfig-trigger.service
@@ -173,7 +173,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532555974
+export SOURCE_DATE_EPOCH=1532728172
 %reconfigure --disable-static --sysconfdir=/usr/share/defaults
 make  %{?_smp_mflags}
 pushd ../build32/
@@ -193,7 +193,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1532555974
+export SOURCE_DATE_EPOCH=1532728172
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/fontconfig
 cp COPYING %{buildroot}/usr/share/doc/fontconfig/COPYING
@@ -240,6 +240,7 @@ ln -s ../fontconfig-trigger.service  %{buildroot}/usr/lib/systemd/system/update-
 %defattr(-,root,root,-)
 /usr/share/defaults/fonts/conf.d/10-hinting-slight.conf
 /usr/share/defaults/fonts/conf.d/10-scale-bitmap-fonts.conf
+/usr/share/defaults/fonts/conf.d/20-unhint-clear-sans.conf
 /usr/share/defaults/fonts/conf.d/20-unhint-small-vera.conf
 /usr/share/defaults/fonts/conf.d/30-metric-aliases.conf
 /usr/share/defaults/fonts/conf.d/40-nonlatin.conf
