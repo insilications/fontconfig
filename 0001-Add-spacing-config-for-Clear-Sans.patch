@@ -1,13 +1,13 @@
-From 0b78761865b6953bfc689b272b52c29695461d2f Mon Sep 17 00:00:00 2001
+From 5e9a18108be2126c61b09ef740632c95d11e7e2e Mon Sep 17 00:00:00 2001
 From: Athenas Jimenez Gonzalez <athenas.jimenez.gonzalez@intel.com>
-Date: Fri, 27 Jul 2018 16:40:55 -0500
+Date: Tue, 31 Jul 2018 10:33:30 -0500
 Subject: [PATCH] Add spacing config for Clear Sans
 
 ---
  conf.d/20-unhint-clear-sans.conf | 13 +++++++++++++
- conf.d/Makefile.am               |  1 +
- conf.d/Makefile.in               |  1 +
- 3 files changed, 15 insertions(+)
+ conf.d/Makefile.am               |  2 ++
+ conf.d/Makefile.in               |  2 ++
+ 3 files changed, 17 insertions(+)
  create mode 100644 conf.d/20-unhint-clear-sans.conf
 
 diff --git a/conf.d/20-unhint-clear-sans.conf b/conf.d/20-unhint-clear-sans.conf
@@ -30,7 +30,7 @@ index 0000000..466ef3e
 +
 +</fontconfig>
 diff --git a/conf.d/Makefile.am b/conf.d/Makefile.am
-index ff03fb2..392810e 100644
+index ff03fb2..941d211 100644
 --- a/conf.d/Makefile.am
 +++ b/conf.d/Makefile.am
 @@ -29,6 +29,7 @@ CONF_LINKS = \
@@ -41,8 +41,16 @@ index ff03fb2..392810e 100644
  	30-metric-aliases.conf \
  	40-nonlatin.conf \
  	45-generic.conf \
+@@ -68,6 +69,7 @@ template_DATA =				\
+ 	11-lcdfilter-legacy.conf	\
+ 	11-lcdfilter-light.conf		\
+ 	20-unhint-small-vera.conf	\
++	20-unhint-clear-sans.conf   \
+ 	25-unhint-nonlatin.conf		\
+ 	30-metric-aliases.conf		\
+ 	40-nonlatin.conf		\
 diff --git a/conf.d/Makefile.in b/conf.d/Makefile.in
-index ff988eb..06b3a03 100644
+index ff988eb..410b179 100644
 --- a/conf.d/Makefile.in
 +++ b/conf.d/Makefile.in
 @@ -371,6 +371,7 @@ CONF_LINKS = \
@@ -53,6 +61,14 @@ index ff988eb..06b3a03 100644
  	30-metric-aliases.conf \
  	40-nonlatin.conf \
  	45-generic.conf \
+@@ -408,6 +409,7 @@ template_DATA = \
+ 	11-lcdfilter-legacy.conf	\
+ 	11-lcdfilter-light.conf		\
+ 	20-unhint-small-vera.conf	\
++	20-unhint-clear-sans.conf   \
+ 	25-unhint-nonlatin.conf		\
+ 	30-metric-aliases.conf		\
+ 	40-nonlatin.conf		\
 -- 
 2.18.0
 

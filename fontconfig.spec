@@ -4,7 +4,7 @@
 #
 Name     : fontconfig
 Version  : 2.13.0
-Release  : 34
+Release  : 35
 URL      : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.0.tar.gz
 Source0  : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.0.tar.gz
 Source1  : fontconfig-trigger.service
@@ -173,7 +173,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532728172
+export SOURCE_DATE_EPOCH=1533051998
 %reconfigure --disable-static --sysconfdir=/usr/share/defaults
 make  %{?_smp_mflags}
 pushd ../build32/
@@ -193,7 +193,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1532728172
+export SOURCE_DATE_EPOCH=1533051998
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/fontconfig
 cp COPYING %{buildroot}/usr/share/doc/fontconfig/COPYING
@@ -211,10 +211,10 @@ popd
 %find_lang fontconfig
 mkdir -p %{buildroot}/usr/lib/systemd/system
 install -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/fontconfig-trigger.service
-## make_install_append content
+## install_append content
 mkdir -p %{buildroot}/usr/lib/systemd/system/update-triggers.target.wants/
 ln -s ../fontconfig-trigger.service  %{buildroot}/usr/lib/systemd/system/update-triggers.target.wants/fontconfig-trigger.service
-## make_install_append end
+## install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -275,6 +275,7 @@ ln -s ../fontconfig-trigger.service  %{buildroot}/usr/lib/systemd/system/update-
 /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf
 /usr/share/fontconfig/conf.avail/11-lcdfilter-legacy.conf
 /usr/share/fontconfig/conf.avail/11-lcdfilter-light.conf
+/usr/share/fontconfig/conf.avail/20-unhint-clear-sans.conf
 /usr/share/fontconfig/conf.avail/20-unhint-small-vera.conf
 /usr/share/fontconfig/conf.avail/25-unhint-nonlatin.conf
 /usr/share/fontconfig/conf.avail/30-metric-aliases.conf
