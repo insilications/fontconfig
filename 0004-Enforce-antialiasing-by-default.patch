@@ -1,4 +1,4 @@
-From 3a5c45a981abe9ec9241ff97faea9ac4338cdb07 Mon Sep 17 00:00:00 2001
+From 3de12f77aaccfcb7148ff49026ebb37739c4b73a Mon Sep 17 00:00:00 2001
 From: Ikey Doherty <michael.i.doherty@intel.com>
 Date: Fri, 21 Oct 2016 22:19:03 +0100
 Subject: [PATCH 4/4] Enforce antialiasing by default

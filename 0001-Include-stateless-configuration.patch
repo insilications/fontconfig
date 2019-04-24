@@ -1,11 +1,12 @@
-From 49c33a13a53f7454dddaf87e61d04c11c7d9cfd9 Mon Sep 17 00:00:00 2001
+From 6d86e5a6b1b684ef8ef765a44d511a184e8e7c1d Mon Sep 17 00:00:00 2001
 From: Dimitri John Ledkov <dimitri.j.ledkov@intel.com>
 Date: Wed, 18 Feb 2015 15:53:43 +0000
 Subject: [PATCH 1/4] Include stateless configuration.
 
 ---
  conf.d/50-user.conf | 6 ++++++
- 1 file changed, 6 insertions(+)
+ src/fcinit.c        | 2 ++
+ 2 files changed, 8 insertions(+)
 
 diff --git a/conf.d/50-user.conf b/conf.d/50-user.conf
 index 681ed6d..9a24f58 100644
@@ -30,6 +31,19 @@ index 681ed6d..9a24f58 100644
  	<include ignore_missing="yes" prefix="xdg">fontconfig/conf.d</include>
  	<include ignore_missing="yes" prefix="xdg">fontconfig/fonts.conf</include>
  	<!-- the following elements will be removed in the future -->
+diff --git a/src/fcinit.c b/src/fcinit.c
+index 5831a19..fc93c4b 100644
+--- a/src/fcinit.c
++++ b/src/fcinit.c
+@@ -45,6 +45,8 @@ FcInitFallbackConfig (const FcChar8 *sysroot)
+ 	"  <dir prefix=\"xdg\">fonts</dir>" \
+ 	"  <cachedir>" FC_CACHEDIR "</cachedir>" \
+ 	"  <cachedir prefix=\"xdg\">fontconfig</cachedir>" \
++	"  <include ignore_missing=\"no\">/usr/share/defaults/fonts/conf.d</include>" \
++	"  <include ignore_missing=\"no\">/usr/share/defaults/fonts/fonts.conf</include>" \
+ 	"  <include ignore_missing=\"yes\" prefix=\"xdg\">fontconfig/conf.d</include>" \
+ 	"  <include ignore_missing=\"yes\" prefix=\"xdg\">fontconfig/fonts.conf</include>" \
+ 	"</fontconfig>";
 -- 
 2.21.0
 
