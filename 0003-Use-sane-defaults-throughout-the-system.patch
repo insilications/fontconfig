@@ -1,7 +1,7 @@
-From 0592680436af2de8c553a8cca2fcf0293e60be32 Mon Sep 17 00:00:00 2001
+From 704adddc8bba5297af574720f4e53fca46447f13 Mon Sep 17 00:00:00 2001
 From: Ikey Doherty <michael.i.doherty@intel.com>
 Date: Fri, 21 Oct 2016 21:54:41 +0100
-Subject: [PATCH 2/3] Use sane defaults throughout the system
+Subject: [PATCH 3/4] Use sane defaults throughout the system
 
 Signed-off-by: Ikey Doherty <michael.i.doherty@intel.com>
 ---
@@ -9,10 +9,10 @@ Signed-off-by: Ikey Doherty <michael.i.doherty@intel.com>
  1 file changed, 3 insertions(+)
 
 diff --git a/conf.d/60-latin.conf b/conf.d/60-latin.conf
-index 35600ea..d5d7361 100644
+index 5be5d6a..9283067 100644
 --- a/conf.d/60-latin.conf
 +++ b/conf.d/60-latin.conf
-@@ -4,6 +4,7 @@
+@@ -9,6 +9,7 @@
  	<alias>
  		<family>serif</family>
  		<prefer>
@@ -20,7 +20,7 @@ index 35600ea..d5d7361 100644
  			<family>Bitstream Vera Serif</family>
  			<family>DejaVu Serif</family>
  			<family>Times New Roman</family>
-@@ -17,6 +18,7 @@
+@@ -22,6 +23,7 @@
  	<alias>
  		<family>sans-serif</family>
  		<prefer>
@@ -28,7 +28,7 @@ index 35600ea..d5d7361 100644
  			<family>Bitstream Vera Sans</family>
  			<family>DejaVu Sans</family>
  			<family>Verdana</family>
-@@ -34,6 +36,7 @@
+@@ -39,6 +41,7 @@
  	<alias>
  		<family>monospace</family>
  		<prefer>
@@ -37,5 +37,5 @@ index 35600ea..d5d7361 100644
  			<family>DejaVu Sans Mono</family>
  			<family>Inconsolata</family>
 -- 
-2.10.1
+2.21.0
 

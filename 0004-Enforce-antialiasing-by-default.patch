@@ -1,7 +1,7 @@
-From 3eb864be2e7efaf16ddb162431dd47d52e103efe Mon Sep 17 00:00:00 2001
+From 3a5c45a981abe9ec9241ff97faea9ac4338cdb07 Mon Sep 17 00:00:00 2001
 From: Ikey Doherty <michael.i.doherty@intel.com>
 Date: Fri, 21 Oct 2016 22:19:03 +0100
-Subject: [PATCH 3/3] Enforce antialiasing by default
+Subject: [PATCH 4/4] Enforce antialiasing by default
 
 Signed-off-by: Ikey Doherty <michael.i.doherty@intel.com>
 ---
@@ -12,23 +12,23 @@ Signed-off-by: Ikey Doherty <michael.i.doherty@intel.com>
 
 diff --git a/conf.d/10-antialiasing.conf b/conf.d/10-antialiasing.conf
 new file mode 100644
-index 0000000..62d86d4
+index 0000000..62d6407
 --- /dev/null
 +++ b/conf.d/10-antialiasing.conf
 @@ -0,0 +1,8 @@
 +<?xml version="1.0"?>
 +<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 +<fontconfig>
-+<!--  Use the Antialiasing --> 
++<!--  Use the Antialiasing -->
 +  <match target="font">
 +    <edit name="antialias" mode="assign"><bool>true</bool></edit>
 +  </match>
 +</fontconfig>
 diff --git a/conf.d/Makefile.am b/conf.d/Makefile.am
-index ac68cd1..e08a982 100644
+index 941d211..b7e2a45 100644
 --- a/conf.d/Makefile.am
 +++ b/conf.d/Makefile.am
-@@ -51,6 +51,7 @@ config_DATA = $(DOC_FILES)
+@@ -53,6 +53,7 @@ config_DATA = $(DOC_FILES)
  
  templatedir = $(TEMPLATEDIR)
  template_DATA =				\
@@ -37,5 +37,5 @@ index ac68cd1..e08a982 100644
  	10-hinting-full.conf		\
  	10-hinting-medium.conf		\
 -- 
-2.10.1
+2.21.0
 

@@ -1,7 +1,7 @@
-From 5e9a18108be2126c61b09ef740632c95d11e7e2e Mon Sep 17 00:00:00 2001
+From 52b5fd857d101d09fa4ba401af7e55b1bea6b4c9 Mon Sep 17 00:00:00 2001
 From: Athenas Jimenez Gonzalez <athenas.jimenez.gonzalez@intel.com>
 Date: Tue, 31 Jul 2018 10:33:30 -0500
-Subject: [PATCH] Add spacing config for Clear Sans
+Subject: [PATCH 2/4] Add spacing config for Clear Sans
 
 ---
  conf.d/20-unhint-clear-sans.conf | 13 +++++++++++++
@@ -50,10 +50,10 @@ index ff03fb2..941d211 100644
  	30-metric-aliases.conf		\
  	40-nonlatin.conf		\
 diff --git a/conf.d/Makefile.in b/conf.d/Makefile.in
-index ff988eb..410b179 100644
+index 604af41..e803017 100644
 --- a/conf.d/Makefile.in
 +++ b/conf.d/Makefile.in
-@@ -371,6 +371,7 @@ CONF_LINKS = \
+@@ -373,6 +373,7 @@ CONF_LINKS = \
  	10-hinting-$(PREFERRED_HINTING).conf	\
  	10-scale-bitmap-fonts.conf \
  	20-unhint-small-vera.conf \
@@ -61,7 +61,7 @@ index ff988eb..410b179 100644
  	30-metric-aliases.conf \
  	40-nonlatin.conf \
  	45-generic.conf \
-@@ -408,6 +409,7 @@ template_DATA = \
+@@ -410,6 +411,7 @@ template_DATA = \
  	11-lcdfilter-legacy.conf	\
  	11-lcdfilter-light.conf		\
  	20-unhint-small-vera.conf	\
@@ -70,5 +70,5 @@ index ff988eb..410b179 100644
  	30-metric-aliases.conf		\
  	40-nonlatin.conf		\
 -- 
-2.18.0
+2.21.0
 

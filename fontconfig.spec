@@ -4,20 +4,20 @@
 #
 Name     : fontconfig
 Version  : 2.13.1
-Release  : 37
+Release  : 38
 URL      : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.1.tar.gz
 Source0  : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.1.tar.gz
 Source1  : fontconfig-trigger.service
 Summary  : Font configuration and customization library
 Group    : Development/Tools
 License  : HPND MIT
-Requires: fontconfig-bin
-Requires: fontconfig-config
-Requires: fontconfig-lib
-Requires: fontconfig-data
-Requires: fontconfig-license
-Requires: fontconfig-locales
-Requires: fontconfig-man
+Requires: fontconfig-bin = %{version}-%{release}
+Requires: fontconfig-data = %{version}-%{release}
+Requires: fontconfig-lib = %{version}-%{release}
+Requires: fontconfig-license = %{version}-%{release}
+Requires: fontconfig-locales = %{version}-%{release}
+Requires: fontconfig-man = %{version}-%{release}
+Requires: fontconfig-services = %{version}-%{release}
 BuildRequires : automake
 BuildRequires : automake-dev
 BuildRequires : fontconfig-data
@@ -46,9 +46,9 @@ BuildRequires : pkgconfig(json-c)
 BuildRequires : pkgconfig(libxml-2.0)
 BuildRequires : pkgconfig(uuid)
 Patch1: 0001-Include-stateless-configuration.patch
-Patch2: 0002-Use-sane-defaults-throughout-the-system.patch
-Patch3: 0003-Enforce-antialiasing-by-default.patch
-Patch4: 0001-Add-spacing-config-for-Clear-Sans.patch
+Patch2: 0002-Add-spacing-config-for-Clear-Sans.patch
+Patch3: 0003-Use-sane-defaults-throughout-the-system.patch
+Patch4: 0004-Enforce-antialiasing-by-default.patch
 
 %description
 Fontconfig is designed to locate fonts within the
@@ -58,21 +58,12 @@ applications.
 %package bin
 Summary: bin components for the fontconfig package.
 Group: Binaries
-Requires: fontconfig-data
-Requires: fontconfig-config
-Requires: fontconfig-license
-Requires: fontconfig-man
+Requires: fontconfig-data = %{version}-%{release}
+Requires: fontconfig-license = %{version}-%{release}
+Requires: fontconfig-services = %{version}-%{release}
 
 %description bin
 bin components for the fontconfig package.
-
-
-%package config
-Summary: config components for the fontconfig package.
-Group: Default
-
-%description config
-config components for the fontconfig package.
 
 
 %package data
@@ -86,10 +77,11 @@ data components for the fontconfig package.
 %package dev
 Summary: dev components for the fontconfig package.
 Group: Development
-Requires: fontconfig-lib
-Requires: fontconfig-bin
-Requires: fontconfig-data
-Provides: fontconfig-devel
+Requires: fontconfig-lib = %{version}-%{release}
+Requires: fontconfig-bin = %{version}-%{release}
+Requires: fontconfig-data = %{version}-%{release}
+Provides: fontconfig-devel = %{version}-%{release}
+Requires: fontconfig = %{version}-%{release}
 
 %description dev
 dev components for the fontconfig package.
@@ -98,10 +90,10 @@ dev components for the fontconfig package.
 %package dev32
 Summary: dev32 components for the fontconfig package.
 Group: Default
-Requires: fontconfig-lib32
-Requires: fontconfig-bin
-Requires: fontconfig-data
-Requires: fontconfig-dev
+Requires: fontconfig-lib32 = %{version}-%{release}
+Requires: fontconfig-bin = %{version}-%{release}
+Requires: fontconfig-data = %{version}-%{release}
+Requires: fontconfig-dev = %{version}-%{release}
 
 %description dev32
 dev32 components for the fontconfig package.
@@ -110,7 +102,7 @@ dev32 components for the fontconfig package.
 %package doc
 Summary: doc components for the fontconfig package.
 Group: Documentation
-Requires: fontconfig-man
+Requires: fontconfig-man = %{version}-%{release}
 
 %description doc
 doc components for the fontconfig package.
@@ -119,8 +111,8 @@ doc components for the fontconfig package.
 %package lib
 Summary: lib components for the fontconfig package.
 Group: Libraries
-Requires: fontconfig-data
-Requires: fontconfig-license
+Requires: fontconfig-data = %{version}-%{release}
+Requires: fontconfig-license = %{version}-%{release}
 
 %description lib
 lib components for the fontconfig package.
@@ -129,8 +121,8 @@ lib components for the fontconfig package.
 %package lib32
 Summary: lib32 components for the fontconfig package.
 Group: Default
-Requires: fontconfig-data
-Requires: fontconfig-license
+Requires: fontconfig-data = %{version}-%{release}
+Requires: fontconfig-license = %{version}-%{release}
 
 %description lib32
 lib32 components for the fontconfig package.
@@ -160,6 +152,14 @@ Group: Default
 man components for the fontconfig package.
 
 
+%package services
+Summary: services components for the fontconfig package.
+Group: Systemd services
+
+%description services
+services components for the fontconfig package.
+
+
 %prep
 %setup -q -n fontconfig-2.13.1
 %patch1 -p1
@@ -175,14 +175,16 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535722815
+export SOURCE_DATE_EPOCH=1556133698
+export LDFLAGS="${LDFLAGS} -fno-lto"
 %reconfigure --disable-static --sysconfdir=/usr/share/defaults
 make  %{?_smp_mflags}
 pushd ../build32/
 export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
-export CFLAGS="$CFLAGS -m32"
-export CXXFLAGS="$CXXFLAGS -m32"
-export LDFLAGS="$LDFLAGS -m32"
+export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
+export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32"
+export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32"
+export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32"
 %reconfigure --disable-static --sysconfdir=/usr/share/defaults  --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
 make  %{?_smp_mflags}
 popd
@@ -193,12 +195,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
+cd ../build32;
+make VERBOSE=1 V=1 %{?_smp_mflags} check || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1535722815
+export SOURCE_DATE_EPOCH=1556133698
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/fontconfig
-cp COPYING %{buildroot}/usr/share/doc/fontconfig/COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/fontconfig
+cp COPYING %{buildroot}/usr/share/package-licenses/fontconfig/COPYING
 pushd ../build32/
 %make_install32
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
@@ -232,11 +236,6 @@ ln -s ../fontconfig-trigger.service  %{buildroot}/usr/lib/systemd/system/update-
 /usr/bin/fc-query
 /usr/bin/fc-scan
 /usr/bin/fc-validate
-
-%files config
-%defattr(-,root,root,-)
-/usr/lib/systemd/system/fontconfig-trigger.service
-/usr/lib/systemd/system/update-triggers.target.wants/fontconfig-trigger.service
 
 %files data
 %defattr(-,root,root,-)
@@ -546,11 +545,11 @@ ln -s ../fontconfig-trigger.service  %{buildroot}/usr/lib/systemd/system/update-
 /usr/lib32/libfontconfig.so.1.12.0
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/fontconfig/COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/fontconfig/COPYING
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man1/fc-cache.1
 /usr/share/man/man1/fc-cat.1
 /usr/share/man/man1/fc-conflist.1
@@ -561,6 +560,11 @@ ln -s ../fontconfig-trigger.service  %{buildroot}/usr/lib/systemd/system/update-
 /usr/share/man/man1/fc-scan.1
 /usr/share/man/man1/fc-validate.1
 /usr/share/man/man5/fonts-conf.5
+
+%files services
+%defattr(-,root,root,-)
+/usr/lib/systemd/system/fontconfig-trigger.service
+/usr/lib/systemd/system/update-triggers.target.wants/fontconfig-trigger.service
 
 %files locales -f fontconfig-conf.lang -f fontconfig.lang
 %defattr(-,root,root,-)
