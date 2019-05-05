@@ -4,11 +4,11 @@
 #
 Name     : fontconfig
 Version  : 2.13.1
-Release  : 39
+Release  : 40
 URL      : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.1.tar.gz
 Source0  : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.1.tar.gz
 Source1  : fontconfig-trigger.service
-Summary  : Font configuration and customization library
+Summary  : A library for configuring and customizing font access
 Group    : Development/Tools
 License  : HPND MIT
 Requires: fontconfig-bin = %{version}-%{release}
@@ -175,8 +175,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1556134449
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export SOURCE_DATE_EPOCH=1557085404
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %reconfigure --disable-static --sysconfdir=/usr/share/defaults
 make  %{?_smp_mflags}
 pushd ../build32/
@@ -199,7 +205,7 @@ cd ../build32;
 make VERBOSE=1 V=1 %{?_smp_mflags} check || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1556134449
+export SOURCE_DATE_EPOCH=1557085404
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/fontconfig
 cp COPYING %{buildroot}/usr/share/package-licenses/fontconfig/COPYING
