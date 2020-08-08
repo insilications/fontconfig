@@ -2,4 +2,31 @@
 # This file contains extra pkgconfig build requirements that don't get picked up but are 
 # desirable. One name per line, no whitespace.
 #
+automake
+automake-dev
+findutils
 fontconfig-data
+gcc-dev32
+gcc-libgcc32
+gcc-libstdc++32
+gettext
+gettext-bin
+glibc-dev32
+glibc-libc32
+gperf
+libtool
+libtool-dev
+m4
+perl(XML::Parser)
+pkg-config
+pkg-config-dev
+util-linux
+util-linux-dev
+util-linux-staticdev
+util-linux-dev32
+util-linux-staticdev32
+expat
+expat-dev
+expat-staticdev
+expat-dev32
+expat-staticdev32

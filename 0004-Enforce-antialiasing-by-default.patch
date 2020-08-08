@@ -1,9 +1,8 @@
-From 3de12f77aaccfcb7148ff49026ebb37739c4b73a Mon Sep 17 00:00:00 2001
-From: Ikey Doherty <michael.i.doherty@intel.com>
-Date: Fri, 21 Oct 2016 22:19:03 +0100
-Subject: [PATCH 4/4] Enforce antialiasing by default
+From 47f99945e7efffb983a28e63325b2837a035652a Mon Sep 17 00:00:00 2001
+From: insilications <boboniboni@gmail.com>
+Date: Sat, 8 Aug 2020 11:56:01 -0300
+Subject: [PATCH 4/4] Enforce antialiasing by default.
 
-Signed-off-by: Ikey Doherty <michael.i.doherty@intel.com>
 ---
  conf.d/10-antialiasing.conf | 8 ++++++++
  conf.d/Makefile.am          | 1 +
@@ -25,17 +24,17 @@ index 0000000..62d6407
 +  </match>
 +</fontconfig>
 diff --git a/conf.d/Makefile.am b/conf.d/Makefile.am
-index 941d211..b7e2a45 100644
+index f69db28..dccf1a1 100644
 --- a/conf.d/Makefile.am
 +++ b/conf.d/Makefile.am
-@@ -53,6 +53,7 @@ config_DATA = $(DOC_FILES)
+@@ -57,6 +57,7 @@ config_DATA = $(DOC_FILES)
  
  templatedir = $(TEMPLATEDIR)
  template_DATA =				\
-+	10-antialiasing.conf    \
++	10-antialiasing.conf		\
+ 	05-reset-dirs-sample.conf	\
+ 	09-autohint-if-no-hinting.conf	\
  	10-autohint.conf		\
- 	10-hinting-full.conf		\
- 	10-hinting-medium.conf		\
 -- 
-2.21.0
+2.27.0
 

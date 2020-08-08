@@ -1,41 +1,40 @@
-From 9b65731a2f20766e1fd085029a1b14ce7377d84a Mon Sep 17 00:00:00 2001
-From: Ikey Doherty <michael.i.doherty@intel.com>
-Date: Fri, 21 Oct 2016 21:54:41 +0100
-Subject: [PATCH 3/4] Use sane defaults throughout the system
+From 289811bd998fd3190c052323df7fdf35d575260d Mon Sep 17 00:00:00 2001
+From: insilications <boboniboni@gmail.com>
+Date: Sat, 8 Aug 2020 11:54:24 -0300
+Subject: [PATCH 3/4] Use sane defaults throughout the system.
 
-Signed-off-by: Ikey Doherty <michael.i.doherty@intel.com>
 ---
  conf.d/60-latin.conf | 3 +++
  1 file changed, 3 insertions(+)
 
 diff --git a/conf.d/60-latin.conf b/conf.d/60-latin.conf
-index 5be5d6a..9283067 100644
+index 25ea40f..fc612dc 100644
 --- a/conf.d/60-latin.conf
 +++ b/conf.d/60-latin.conf
-@@ -9,6 +9,7 @@
+@@ -5,6 +5,7 @@
  	<alias>
  		<family>serif</family>
  		<prefer>
-+			<family>Clear Sans</family>
- 			<family>Bitstream Vera Serif</family>
++            <family>Clear Sans</family>
  			<family>DejaVu Serif</family>
  			<family>Times New Roman</family>
-@@ -22,6 +23,7 @@
+ 			<family>Thorndale AMT</family>
+@@ -17,6 +18,7 @@
  	<alias>
  		<family>sans-serif</family>
  		<prefer>
-+			<family>Clear Sans</family>
- 			<family>Bitstream Vera Sans</family>
++            <family>Clear Sans</family>
  			<family>DejaVu Sans</family>
  			<family>Verdana</family>
-@@ -39,6 +41,7 @@
+ 			<family>Arial</family>
+@@ -33,6 +35,7 @@
  	<alias>
  		<family>monospace</family>
  		<prefer>
-+			<family>Droid Sans Mono for Powerline</family>
- 			<family>Bitstream Vera Sans Mono</family>
++            <family>Droid Sans Mono for Powerline</family>
  			<family>DejaVu Sans Mono</family>
  			<family>Inconsolata</family>
+ 			<family>Andale Mono</family>
 -- 
-2.21.0
+2.27.0
 

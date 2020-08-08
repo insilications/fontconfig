@@ -2,3 +2,13 @@
 # This file contains extra pkgconfig build requirements that don't get picked up but are 
 # desirable. One name per line, no whitespace.
 #
+32expat
+32freetype2
+32json-c
+32libxml-2.0
+32uuid
+expat
+freetype2
+json-c
+libxml-2.0
+uuid

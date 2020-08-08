@@ -1,5 +1,5 @@
 PKG_NAME := fontconfig
-URL = https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.1.tar.gz
+URL = https://github.com/freedesktop/fontconfig.git
 ARCHIVES = 
 
 include ../common/Makefile.common

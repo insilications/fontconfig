@@ -1,1 +1,1 @@
---sysconfdir=/usr/share/defaults
+--enable-static --enable-shared --sysconfdir=/usr/share/defaults --disable-docs
