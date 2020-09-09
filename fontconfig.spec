@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : fontconfig
 Version  : 2.13.91
-Release  : 43
+Release  : 44
 URL      : file:///insilications/build/clearlinux/packages/fontconfig/fontconfig-2.13.91.tar.gz
 Source0  : file:///insilications/build/clearlinux/packages/fontconfig/fontconfig-2.13.91.tar.gz
 Source1  : fontconfig-trigger.service
@@ -28,6 +28,8 @@ BuildRequires : expat-staticdev
 BuildRequires : expat-staticdev32
 BuildRequires : findutils
 BuildRequires : fontconfig-data
+BuildRequires : freetype-dev
+BuildRequires : freetype-staticdev
 BuildRequires : gcc-dev32
 BuildRequires : gcc-libgcc32
 BuildRequires : gcc-libstdc++32
@@ -38,6 +40,8 @@ BuildRequires : glibc-libc32
 BuildRequires : gperf
 BuildRequires : libtool
 BuildRequires : libtool-dev
+BuildRequires : libxml2-dev
+BuildRequires : libxml2-staticdev
 BuildRequires : m4
 BuildRequires : perl(XML::Parser)
 BuildRequires : pkg-config
@@ -181,8 +185,9 @@ popd
 unset http_proxy
 unset https_proxy
 unset no_proxy
+export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1598782644
+export SOURCE_DATE_EPOCH=1599679515
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
@@ -259,12 +264,13 @@ export LANG=C.UTF-8
 unset http_proxy
 unset https_proxy
 unset no_proxy
+export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 make %{?_smp_mflags} check || :
 cd ../build32;
 make %{?_smp_mflags} check || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1598782644
+export SOURCE_DATE_EPOCH=1599679515
 rm -rf %{buildroot}
 pushd ../build32/
 %make_install32
