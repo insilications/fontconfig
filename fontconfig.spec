@@ -4,7 +4,7 @@
 #
 Name     : fontconfig
 Version  : 2.13.1
-Release  : 41
+Release  : 42
 URL      : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.1.tar.gz
 Source0  : https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.1.tar.gz
 Source1  : fontconfig-trigger.service
@@ -21,13 +21,8 @@ Requires: fontconfig-services = %{version}-%{release}
 BuildRequires : automake
 BuildRequires : automake-dev
 BuildRequires : fontconfig-data
-BuildRequires : gcc-dev32
-BuildRequires : gcc-libgcc32
-BuildRequires : gcc-libstdc++32
 BuildRequires : gettext
 BuildRequires : gettext-bin
-BuildRequires : glibc-dev32
-BuildRequires : glibc-libc32
 BuildRequires : gperf
 BuildRequires : libtool
 BuildRequires : libtool-dev
@@ -35,11 +30,6 @@ BuildRequires : m4
 BuildRequires : perl(XML::Parser)
 BuildRequires : pkg-config
 BuildRequires : pkg-config-dev
-BuildRequires : pkgconfig(32expat)
-BuildRequires : pkgconfig(32freetype2)
-BuildRequires : pkgconfig(32json-c)
-BuildRequires : pkgconfig(32libxml-2.0)
-BuildRequires : pkgconfig(32uuid)
 BuildRequires : pkgconfig(expat)
 BuildRequires : pkgconfig(freetype2)
 BuildRequires : pkgconfig(json-c)
@@ -87,18 +77,6 @@ Requires: fontconfig = %{version}-%{release}
 dev components for the fontconfig package.
 
 
-%package dev32
-Summary: dev32 components for the fontconfig package.
-Group: Default
-Requires: fontconfig-lib32 = %{version}-%{release}
-Requires: fontconfig-bin = %{version}-%{release}
-Requires: fontconfig-data = %{version}-%{release}
-Requires: fontconfig-dev = %{version}-%{release}
-
-%description dev32
-dev32 components for the fontconfig package.
-
-
 %package doc
 Summary: doc components for the fontconfig package.
 Group: Documentation
@@ -116,16 +94,6 @@ Requires: fontconfig-license = %{version}-%{release}
 
 %description lib
 lib components for the fontconfig package.
-
-
-%package lib32
-Summary: lib32 components for the fontconfig package.
-Group: Default
-Requires: fontconfig-data = %{version}-%{release}
-Requires: fontconfig-license = %{version}-%{release}
-
-%description lib32
-lib32 components for the fontconfig package.
 
 
 %package license
@@ -162,63 +130,41 @@ services components for the fontconfig package.
 
 %prep
 %setup -q -n fontconfig-2.13.1
+cd %{_builddir}/fontconfig-2.13.1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-pushd ..
-cp -a fontconfig-2.13.1 build32
-popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1568831659
+export SOURCE_DATE_EPOCH=1600306439
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %reconfigure --disable-static --sysconfdir=/usr/share/defaults
 make  %{?_smp_mflags}
-pushd ../build32/
-export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
-export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
-export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
-export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32 -mstackrealign"
-export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
-%reconfigure --disable-static --sysconfdir=/usr/share/defaults  --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
-make  %{?_smp_mflags}
-popd
 
 %check
 export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check || :
-cd ../build32;
-make VERBOSE=1 V=1 %{?_smp_mflags} check || : || :
+make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1568831659
+export SOURCE_DATE_EPOCH=1600306439
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/fontconfig
-cp COPYING %{buildroot}/usr/share/package-licenses/fontconfig/COPYING
-pushd ../build32/
-%make_install32
-if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
-then
-pushd %{buildroot}/usr/lib32/pkgconfig
-for i in *.pc ; do ln -s $i 32$i ; done
-popd
-fi
-popd
+cp %{_builddir}/fontconfig-2.13.1/COPYING %{buildroot}/usr/share/package-licenses/fontconfig/ae92a5e66650b2e46038f56b0159851840513476
 %make_install
 %find_lang fontconfig-conf
 %find_lang fontconfig
@@ -266,7 +212,6 @@ ln -s ../fontconfig-trigger.service  %{buildroot}/usr/lib/systemd/system/update-
 /usr/share/defaults/fonts/conf.d/90-synthetic.conf
 /usr/share/defaults/fonts/conf.d/README
 /usr/share/defaults/fonts/fonts.conf
-/usr/share/defaults/fonts/fonts.conf.bak
 /usr/share/fontconfig/conf.avail/10-antialiasing.conf
 /usr/share/fontconfig/conf.avail/10-autohint.conf
 /usr/share/fontconfig/conf.avail/10-hinting-full.conf
@@ -531,12 +476,6 @@ ln -s ../fontconfig-trigger.service  %{buildroot}/usr/lib/systemd/system/update-
 /usr/share/man/man3/FcWeightToOpenType.3
 /usr/share/man/man3/FcWeightToOpenTypeDouble.3
 
-%files dev32
-%defattr(-,root,root,-)
-/usr/lib32/libfontconfig.so
-/usr/lib32/pkgconfig/32fontconfig.pc
-/usr/lib32/pkgconfig/fontconfig.pc
-
 %files doc
 %defattr(0644,root,root,0755)
 %doc /usr/share/doc/fontconfig/*
@@ -546,14 +485,9 @@ ln -s ../fontconfig-trigger.service  %{buildroot}/usr/lib/systemd/system/update-
 /usr/lib64/libfontconfig.so.1
 /usr/lib64/libfontconfig.so.1.12.0
 
-%files lib32
-%defattr(-,root,root,-)
-/usr/lib32/libfontconfig.so.1
-/usr/lib32/libfontconfig.so.1.12.0
-
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/fontconfig/COPYING
+/usr/share/package-licenses/fontconfig/ae92a5e66650b2e46038f56b0159851840513476
 
 %files man
 %defattr(0644,root,root,0755)
