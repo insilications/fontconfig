@@ -13,6 +13,8 @@ findutils
 fontconfig-data
 freetype-dev
 freetype-staticdev
+harfbuzz-dev
+harfbuzz-staticdev
 gcc-dev32
 gcc-libgcc32
 gcc-libstdc++32
